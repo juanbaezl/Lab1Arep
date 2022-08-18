@@ -12,12 +12,13 @@ public class APIClassGetter {
     // Request to the API
     private static final String USER_AGENT = "Mozilla/5.0";
     private static final String GET_URL = "https://www.alphavantage.co/query?";
-    private static final String API_KEY = "&apikey=demo";
+    private static final String API_KEY = "&apikey=8US7JKS3WL37HQK9";
 
     // Attributes
     protected ArrayList<String> parameters = new ArrayList<>();
     protected ArrayList<String> input = new ArrayList<>();
     private StringBuilder query;
+    private Cache cache = Cache.getInstance();
 
     public APIClassGetter(String function, String symbol) {
         buildParameters();
@@ -52,28 +53,33 @@ public class APIClassGetter {
     }
 
     public String getStock() throws IOException {
-        URL obj = new URL(query.toString());
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            return response.toString();
+        if (cache.contains(query.toString())) {
+            return cache.get(query.toString());
         } else {
-            System.out.println("GET request not worked");
-            return "GET request not worked";
+            URL obj = new URL(query.toString());
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            int responseCode = con.getResponseCode();
+            System.out.println("GET Response Code :: " + responseCode);
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                cache.insert(query.toString(), response.toString());
+                return response.toString();
+            } else {
+                System.out.println("GET request not worked");
+                return "GET request not worked";
+            }
         }
+
     }
 
 }

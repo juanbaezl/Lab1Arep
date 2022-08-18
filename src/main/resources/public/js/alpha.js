@@ -35,7 +35,6 @@ class Alpha extends React.Component {
     if (this.state.function == "intraday") {
       url += "&interval=" + this.state.interval;
     }
-    console.log(url);
     fetch(url, { method: "GET" })
       .then((x) => x.json())
       .then((y) => {
@@ -67,7 +66,7 @@ class Alpha extends React.Component {
               <input
                 required
                 type="text"
-                placeholder="ej. 1min, 2min ..."
+                placeholder="ej. 1min, 5min ..."
                 value={this.state.interval}
                 onChange={this.handleChangeInputInterval}
               ></input>
