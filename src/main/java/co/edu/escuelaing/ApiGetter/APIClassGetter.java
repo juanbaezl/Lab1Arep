@@ -1,4 +1,4 @@
-package co.edu.escuelaing.ApiAlpha;
+package co.edu.escuelaing.ApiGetter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,12 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class APIClassGetter {
+public abstract class APIClassGetter {
 
     // Request to the API
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String GET_URL = "https://www.alphavantage.co/query?";
-    private static final String API_KEY = "&apikey=8US7JKS3WL37HQK9";
+    private String get_url = "https://www.alphavantage.co/query?";
+    private String api_key = "&apikey=8US7JKS3WL37HQK9";
 
     // Attributes
     protected ArrayList<String> parameters = new ArrayList<>();
@@ -20,36 +20,31 @@ public class APIClassGetter {
     private StringBuilder query;
     private Cache cache = Cache.getInstance();
 
-    public APIClassGetter(String function, String symbol) {
-        buildParameters();
-        input.add(function);
-        input.add(symbol);
+    public APIClassGetter(String url, String key) {
+        this.get_url = url;
+        this.api_key = key;
         buildQuery();
     }
 
     public APIClassGetter() {
     }
 
-    public void buildParameters() {
-        parameters.add("function=");
-        parameters.add("&symbol=");
-    }
+    public abstract void buildParameters();
 
     public void buildQuery() {
         query = new StringBuilder();
         byte counter = 0;
-        query.append(GET_URL);
+        query.append(get_url);
         for (String parameter : parameters) {
             query.append(parameter);
             try {
                 query.append(input.get(counter));
             } catch (IndexOutOfBoundsException indexBounds) {
-                System.out.println("Intended out of bounds error access. Skipping");
-                System.out.println("In AlphaVantageQuery.java - buildQuery()");
+                System.out.println("Index out of bounds");
             }
             counter++;
         }
-        query.append(API_KEY);
+        query.append(api_key);
     }
 
     public String getStock() throws IOException {

@@ -1,6 +1,6 @@
-package co.edu.escuelaing.ApiAlpha;
+package co.edu.escuelaing.ApiGetter.ApiAlpha;
 
-public class Daily extends APIClassGetter {
+public class Daily extends AlphaGetter {
 
     public Daily(String symbol) {
         super("TIME_SERIES_DAILY", symbol);

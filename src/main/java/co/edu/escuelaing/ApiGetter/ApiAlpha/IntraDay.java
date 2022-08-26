@@ -1,6 +1,6 @@
-package co.edu.escuelaing.ApiAlpha;
+package co.edu.escuelaing.ApiGetter.ApiAlpha;
 
-public class IntraDay extends APIClassGetter {
+public class IntraDay extends AlphaGetter {
 
     public IntraDay(String symbol, String interval) {
         super("TIME_SERIES_INTRADAY", symbol);

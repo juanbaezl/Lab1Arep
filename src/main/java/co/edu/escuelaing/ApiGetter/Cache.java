@@ -1,4 +1,4 @@
-package co.edu.escuelaing.ApiAlpha;
+package co.edu.escuelaing.ApiGetter;
 
 import java.util.HashMap;
 
