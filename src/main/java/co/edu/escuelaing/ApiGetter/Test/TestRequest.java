@@ -1,6 +1,7 @@
 package co.edu.escuelaing.ApiGetter.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import co.edu.escuelaing.ApiGetter.ApiPolygon.PreviousClose;
 
 public class TestRequest implements Runnable {
 
-    private static final List<String> category = List.of("intraday", "daily", "weekly", "monthly", "aggregates",
+    private static final List<String> category = Arrays.asList("intraday", "daily", "weekly", "monthly", "aggregates",
             "openclose", "previousclose");
 
     @Override
