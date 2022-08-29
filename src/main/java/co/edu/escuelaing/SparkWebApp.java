@@ -26,6 +26,12 @@ public class SparkWebApp {
         });
     }
 
+    /**
+     * Identify the function to be executed
+     * 
+     * @param req request from the client
+     * @return Response to be send
+     */
     private static String identifyFunction(Request req) throws IOException {
         String res = "";
         switch (req.queryParams("function")) {

@@ -20,17 +20,34 @@ public abstract class APIClassGetter {
     private StringBuilder query;
     private Cache cache = Cache.getInstance();
 
+    /**
+     * Constructor for APIClassGetter
+     *
+     * @param url URL of the API
+     * @param key API key
+     */
     public APIClassGetter(String url, String key) {
         this.get_url = url;
         this.api_key = key;
         buildQuery();
     }
 
+    /**
+     * Constructor vacio APIClassGetter
+     */
     public APIClassGetter() {
     }
 
+    /**
+     * Metodo que construye los parametros para la consulta
+     *
+     */
     public abstract void buildParameters();
 
+    /**
+     * Metodo que construye la consulta
+     *
+     */
     public void buildQuery() {
         query = new StringBuilder();
         byte counter = 0;
@@ -47,6 +64,12 @@ public abstract class APIClassGetter {
         query.append(api_key);
     }
 
+    /**
+     * Metodo que obtiene la respuesta de la consulta
+     * 
+     * @return String con la respuesta de la consulta
+     * @throws IOException
+     */
     public String getStock() throws IOException {
         if (cache.contains(query.toString())) {
             return cache.get(query.toString());
@@ -70,7 +93,7 @@ public abstract class APIClassGetter {
                 cache.insert(query.toString(), response.toString());
                 return response.toString();
             } else {
-                System.out.println("GET request not worked");
+                System.out.println("GET request not worked: " + query.toString());
                 return "GET request not worked";
             }
         }
