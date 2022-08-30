@@ -37,7 +37,7 @@ De otra forma:
 $ java -cp target/classes:target/dependency/* co.edu.escuelaing.SparkWebApp
 ```
 
-Una vez ejecute este comando podrá ingresar al servidor web desde su navegador con la siguiente ruta http://localhost:55000, en esta encontrará una página en el que podra ingresar al api de alphavantage y en otra un simple formulario para obtener un saludo
+Una vez ejecute este comando podrá ingresar al servidor web desde su navegador con la siguiente ruta http://localhost:5000, en esta encontrará una página en el que podra ingresar al api de alphavantage y en otra un simple formulario para obtener un saludo
 
 En caso de querer probar la concurrencia mencionada debe ejecutar el siguiente código:
 
